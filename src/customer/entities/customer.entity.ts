@@ -12,7 +12,7 @@ export class Customer {
     lastName : string;
 
     @Column()
-    phoneNumber: number;
+    phoneNumber: string;
 
     @Column()
     email : string;
