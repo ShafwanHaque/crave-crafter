@@ -27,19 +27,19 @@ export class PaymentService {
           return await this.paymentRepository.save(payment);
   }
 
-  findAll() {
-    return `This action returns all payment`;
+  findAll() :Promise<Payment[]>{
+    return this.paymentRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} payment`;
+  async findOne(id: number) {
+    return await this.paymentRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updatePaymentDto: UpdatePaymentDto) {
-    return `This action updates a #${id} payment`;
+  async update(id: number, updatePaymentDto: UpdatePaymentDto) {
+    return await this.paymentRepository.update(id,updatePaymentDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} payment`;
+    return this.paymentRepository.delete(id);
   }
 }

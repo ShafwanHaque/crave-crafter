@@ -18,19 +18,19 @@ export class FoodService {
     //return 'This action adds a new food';
   }
 
-  findAll() {
-    return `This action returns all food`;
+  findAll() :Promise<Food[]>{
+    return this.foodRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} food`;
+  async findOne(id: number) {
+    return await this.foodRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updateFoodDto: UpdateFoodDto) {
-    return `This action updates a #${id} food`;
+  async update(id: number, updateFoodDto: UpdateFoodDto) {
+    return await this.foodRepository.update(id,updateFoodDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} food`;
+    return this.foodRepository.delete(id);
   }
 }

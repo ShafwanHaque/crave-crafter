@@ -27,19 +27,19 @@ export class ProductsService {
           return await this.productRepository.save(product);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  findAll() :Promise<Product[]>{
+    return this.productRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    return await this.productRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, updateProductDto: UpdateProductDto) {
+    return await this.productRepository.update(id,updateProductDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    return this.productRepository.delete(id);
   }
 }

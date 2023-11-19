@@ -25,19 +25,19 @@ export class RiderService {
           return await this.riderRepository.save(rider);
   }
 
-  findAll() {
-    return `This action returns all rider`;
+  findAll() :Promise<Rider[]>{
+    return this.riderRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} rider`;
+  async findOne(id: number) {
+    return await this.riderRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updateRiderDto: UpdateRiderDto) {
-    return `This action updates a #${id} rider`;
+  async update(id: number, updateRiderDto: UpdateRiderDto) {
+    return await this.riderRepository.update(id,updateRiderDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} rider`;
+    return this.riderRepository.delete(id);
   }
 }

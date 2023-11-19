@@ -20,19 +20,19 @@ export class GroceryService {
     //return 'This action adds a new grocery';
   }
 
-  findAll() {
-    return `This action returns all grocery`;
+  findAll() :Promise<Grocery[]>{
+    return this.groceryRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} grocery`;
+  async findOne(id: number) {
+    return await this.groceryRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updateGroceryDto: UpdateGroceryDto) {
-    return `This action updates a #${id} grocery`;
+  async update(id: number, updateGroceryDto: UpdateGroceryDto) {
+    return await this.groceryRepository.update(id,updateGroceryDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} grocery`;
+    return this.groceryRepository.delete(id);
   }
 }

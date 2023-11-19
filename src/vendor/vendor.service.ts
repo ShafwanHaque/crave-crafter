@@ -25,19 +25,19 @@ export class VendorService {
           return await this.vendorRepository.save(vendor);
   }
 
-  findAll() {
-    return `This action returns all vendor`;
+  findAll() :Promise<Vendor[]>{
+    return this.vendorRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} vendor`;
+  async findOne(id: number) {
+    return await this.vendorRepository.findOne({where:{id:id}})
   }
 
-  update(id: number, updateVendorDto: UpdateVendorDto) {
-    return `This action updates a #${id} vendor`;
+  async update(id: number, updateVendorDto: UpdateVendorDto) {
+    return await this.vendorRepository.update(id,updateVendorDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} vendor`;
+    return this.vendorRepository.delete(id);
   }
 }
