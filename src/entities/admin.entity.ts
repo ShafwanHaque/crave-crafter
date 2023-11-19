@@ -26,3 +26,5 @@ export class Admin{
         this.password = await bcrypt.hash(this.password,10);
     }
 }
+
+asdasd
