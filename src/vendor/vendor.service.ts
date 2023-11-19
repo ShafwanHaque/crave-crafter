@@ -1,11 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVendorDto } from './dto/create-vendor.dto';
 import { UpdateVendorDto } from './dto/update-vendor.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Vendor } from './entities/vendor.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class VendorService {
-  create(createVendorDto: CreateVendorDto) {
-    return 'This action adds a new vendor';
+  //inject vendor repository
+  constructor(@InjectRepository(Vendor) private readonly vendorRepository : Repository<Vendor>){
+
+  }
+  async create(createVendorDto: CreateVendorDto) :Promise<Vendor> {
+    // let vendor : Vendor = new Vendor();
+    // vendor.companyName = createVendorDto.companyName;
+    // vendor.contactNumber = createVendorDto.contactNumber;
+    // vendor.email = createVendorDto.email;
+    // vendor.address = createVendorDto.address;
+    // vendor.status = createVendorDto.status;
+
+    // return this.vendorRepository.save(vendor);
+
+      const vendor = await this.vendorRepository.create(createVendorDto);
+          return await this.vendorRepository.save(vendor);
   }
 
   findAll() {

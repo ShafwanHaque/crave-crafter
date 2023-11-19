@@ -21,10 +21,9 @@ export class Admin{
 
     @OneToMany((type) => Admin, (admin) =>admin.comment)
     comment: Comment[];
+    
     @BeforeInsert()
     async hashPassword(){
         this.password = await bcrypt.hash(this.password,10);
     }
 }
-
-asdasd
