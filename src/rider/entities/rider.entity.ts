@@ -22,5 +22,4 @@ export class Rider {
 
     @Column()
     status: string;
-
 }

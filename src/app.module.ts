@@ -16,7 +16,7 @@ import { ProductsModule } from './products/products.module';
 import { GroceryModule } from './grocery/grocery.module';
 import { FoodModule } from './food/food.module';
 import { PaymentModule } from './payment/payment.module';
-import { CustomerModule } from './customer/customer.module';
+//import { CustomerModule } from './customer/customer.module';
 @Module({
   imports: [AdminModule,
     TypeOrmModule.forRootAsync({
@@ -33,7 +33,7 @@ import { CustomerModule } from './customer/customer.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
-        //entities: [Admin, Topic, Comment],
+        //entities: [Admin, Topic, Comment, Rider],
         synchronize:  configService.get<boolean>('DB_SYNC'),
         entities : [__dirname + '/**/*.entity{.ts,.js}'],
         logging :true
@@ -48,7 +48,6 @@ import { CustomerModule } from './customer/customer.module';
     GroceryModule,
     FoodModule,
     PaymentModule,
-    CustomerModule,
    ],
   controllers: [AppController],
   providers: [AppService],
