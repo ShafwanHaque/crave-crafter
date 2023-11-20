@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Query, Res, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, ParseIntPipe, Patch, Post, Put, Query, Res, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CreateAdminDto, UpdateAdminDto } from "./dto/createAdminDto";
 import { AdminService } from "./admin.service";
 import { CommentService } from "src/comment/comment.service";
@@ -20,12 +20,33 @@ export class AdminController{
     
     @Get(":id")
     findOne(@Param("id", ParseIntPipe) id:number){
-        return this.adminService.findOne(id);
+        try{
+            return this.adminService.findOne(id);
+        }
+        catch(error) { 
+            throw new HttpException({
+            status: HttpStatus.FORBIDDEN,
+            error: 'This is a admin message',
+            },
+            HttpStatus.FORBIDDEN,
+            );
+        }
+
     }
 
     @Get()
-    findAll(){
-        return this.adminService.findAll();
+    async findAll(){
+        try{
+           return await this.adminService.findAll();
+        }
+        catch(error) { 
+            throw new HttpException({
+            status: HttpStatus.FORBIDDEN,
+            error: 'This is a admin message',
+            },
+            HttpStatus.FORBIDDEN,
+            );
+        }
     }
 
     @Post()
